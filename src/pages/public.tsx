@@ -11,12 +11,14 @@ import {
   InputLeftAddon,
   Button,
   Badge,
+  Text,
 } from "@chakra-ui/react";
 import Navbar from "@/components/Navbar";
 import Header from "@/components/Head";
 import TextareaAutosize from "react-textarea-autosize";
 import { GetStaticProps } from "next";
 import { PatientRecord } from "@/utils/types";
+import { FiEdit } from "react-icons/fi";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -73,7 +75,7 @@ const Home = ({ data }: { data: PatientRecord }) => {
       >
         <Navbar
           name={data.legalName}
-          tab={"Tab 1"}
+          tab={"Tab 3"}
         />
         <VStack
           w="80%"
@@ -81,9 +83,20 @@ const Home = ({ data }: { data: PatientRecord }) => {
           p={5}
           alignItems="flex-start"
         >
-          <Heading size="xl">
-            Data you are sharing with <span>the public</span>
-          </Heading>
+          <HStack w="100%">
+            <Heading size={"xl"}>Data you are sharing with</Heading>
+            <Heading
+              size={"xl"}
+              color={"brands.blue"}
+            >
+              the public
+            </Heading>
+          </HStack>
+
+          <Text size={"lg"}>
+            View and modify the data that you are sharing with the public. Public is defined as
+            anyone who has the QR link to your profile.
+          </Text>
 
           <Divider />
 
@@ -166,9 +179,14 @@ const Home = ({ data }: { data: PatientRecord }) => {
                 <Button
                   onClick={handleEditModeToggleSave}
                   variant="solid"
-                  colorScheme={editMode ? "blue" : "gray"}
+                  // colorScheme={editMode ? "blue" : "gray"}
+                  bg={editMode ? "brands.blue" : "white"}
+                  color={editMode ? "white" : "brands.blue"}
+                  border="1px"
+                  borderColor={editMode ? "gray.300" : "brands.blue"}
                 >
                   {editMode ? "Save" : "Edit"}
+                  {editMode ? null : <FiEdit style={{ marginLeft: "10px" }} />}
                 </Button>
 
                 {editMode ? (

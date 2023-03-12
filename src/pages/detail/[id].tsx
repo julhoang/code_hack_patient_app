@@ -70,7 +70,7 @@ export default function DetailView({ data }: { data: PatientRecord }) {
               alignItems="flex-start"
               spacing={5}
             >
-              <Heading size="xl">Visit Record with {details.clinician} </Heading>
+              <Heading size="xl">Visit Summary with {details.clinician} </Heading>
               <HStack>
                 <Text
                   as="b"
@@ -79,6 +79,15 @@ export default function DetailView({ data }: { data: PatientRecord }) {
                   Place
                 </Text>
                 <Text>{details.clinicName}</Text>
+              </HStack>
+              <HStack>
+                <Text
+                  as="b"
+                  w={200}
+                >
+                  Speciality
+                </Text>
+                <Text>{details.clinicianSpecialty}</Text>
               </HStack>
               <HStack>
                 <Text
@@ -105,7 +114,7 @@ export default function DetailView({ data }: { data: PatientRecord }) {
                   as="b"
                   w={200}
                 >
-                  Visit Summary
+                  Documents
                 </Text>
                 <Text></Text>
               </HStack>

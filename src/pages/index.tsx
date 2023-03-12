@@ -48,40 +48,64 @@ function SingleCard({ title, content }: { title?: string; content?: string }) {
 
 function MainContent() {
   return (
-    <SimpleGrid
-      spacing={10}
-      templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
-      marginTop={10}
-    >
-      <SingleCard
-        title="Medications"
-        content="View your current and past medications."
-      />
-      <SingleCard
-        title="Insurance"
-        content="View your insurance information and claims."
-      />
-      <SingleCard
-        title="Lab Results"
-        content="View your lab results."
-      />
-      <SingleCard
-        title="Hospital Visits"
-        content="View your hospital visits and reports."
-      />
-      <SingleCard
-        title="Immunizations"
-        content="View your immunization records."
-      />
-      <SingleCard
-        title="Clinician Visits"
-        content="View your past clinic visits and records."
-      />
-      <SingleCard
-        title="Advanced Care Planning"
-        content="View and update your advance care planning preferences."
-      />
-    </SimpleGrid>
+    <>
+      <Heading
+        size="lg"
+        marginTop={5}
+        color="#1844e8"
+      >
+        Frequently Accessed
+      </Heading>
+      <SimpleGrid
+        spacing={10}
+        templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+        marginTop={10}
+      >
+        <SingleCard
+          title="Medications"
+          content="View your current and past medications."
+        />
+        <SingleCard
+          title="Hospital Visits"
+          content="View your hospital visits and reports."
+        />
+
+        <SingleCard
+          title="Clinician Visits"
+          content="View your past clinic visits and records."
+        />
+      </SimpleGrid>
+
+      <Heading
+        size="lg"
+        marginTop={5}
+        color="#1844e8"
+      >
+        Recently Accessed
+      </Heading>
+      <SimpleGrid
+        spacing={10}
+        templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+        marginTop={10}
+      >
+        <SingleCard
+          title="Immunizations"
+          content="View your immunization records."
+        />
+        <SingleCard
+          title="Insurance"
+          content="View your insurance information and claims."
+        />
+        <SingleCard
+          title="Lab Results"
+          content="View your lab results."
+        />
+        <SingleCard
+          title="Advanced Care Planning"
+          content="View and update your advance care planning preferences."
+        />
+      </SimpleGrid>
+    </>
   );
 }
 
@@ -105,7 +129,16 @@ export default function Overview({ data }: { data: PatientRecord }) {
           p={5}
           alignItems="flex-start"
         >
-          <Heading size="xl">Overview</Heading>
+          <HStack w="100%">
+            <Heading size={"xl"}>My</Heading>
+            <Heading
+              size={"xl"}
+              color={"brands.blue"}
+            >
+              Overview
+            </Heading>
+          </HStack>
+          <Text size={"lg"}>Find access to all of your health data here.</Text>
 
           <Divider />
 

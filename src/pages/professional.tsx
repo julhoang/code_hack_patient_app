@@ -35,9 +35,19 @@ export default function ProfessionalPage({ data }: { data: PatientRecord }) {
           p={5}
           alignItems="flex-start"
         >
-          <Heading size="xl">
-            Data you've shared with <span>healthcare professionals</span>
-          </Heading>
+          <HStack w="100%">
+            <Heading size={"xl"}>Data you shared with</Heading>
+            <Heading
+              size={"xl"}
+              color={"brands.blue"}
+            >
+              the healthcare professionals
+            </Heading>
+          </HStack>
+          <Text size={"lg"}>
+            View the history of all data that you have consented to share with different healthcare
+            facilities.
+          </Text>
 
           <Divider />
 

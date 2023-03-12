@@ -11,7 +11,7 @@ const myTheme = extendTheme({
       lightGrey: "#F5F5F5",
       darkGrey: "#616161",
       lightBlue: "#E1F5FE",
-      blue: "#03A9F4",
+      blue: "#1448E3",
       darkBlue: "#0288D1",
       lightGreen: "#E8F5E9",
       green: "#4CAF50",
