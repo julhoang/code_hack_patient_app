@@ -70,6 +70,8 @@ export default function VisitTable({ data }: { data: PatientRecord }) {
       <TableContainer
         maxWidth="100%"
         marginTop={5}
+        overflowY="hidden"
+        maxHeight={"70vh"}
       >
         <Table variant="striped">
           <Thead>
