@@ -2,18 +2,18 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Button, Text } from "@chakra-ui/react";
 import { FiArrowUpRight } from "react-icons/fi";
 import { useRouter } from "next/router";
-import data from "@/utils/db";
+import { AccessLog, PatientRecord } from "@/utils/types";
 
-const Row = ({ details, id }: { details: object; id: number }) => {
+const Row = ({ details, id }: { details: AccessLog; id: string }) => {
   const router = useRouter();
-  const time = new Date(details.accessTime);
+
   return (
     <Tr>
       <Td>
         <Text>{details.clinician}</Text>
       </Td>
       <Td>
-        <Text>{time.toString()}</Text>
+        <Text>{details.accessTime}</Text>
       </Td>
       <Td>
         <Button
@@ -29,16 +29,16 @@ const Row = ({ details, id }: { details: object; id: number }) => {
   );
 };
 
-export default function VisitTable() {
+export default function VisitTable({ data }: { data: PatientRecord }) {
   return (
     <TableContainer
       maxWidth="100%"
-      marginTop={10}
+      marginTop={5}
     >
       <Table variant="striped">
         <Thead>
           <Tr>
-            <Th>Place</Th>
+            <Th>Doctor</Th>
             <Th>Date</Th>
             <Th>Details</Th>
           </Tr>
@@ -48,7 +48,7 @@ export default function VisitTable() {
             <Row
               details={value}
               key={index}
-              id={index}
+              id={value.visitID}
             />
           ))}
         </Tbody>

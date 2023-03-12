@@ -3,16 +3,30 @@ import { useRouter } from "next/router";
 import { VStack, Heading, Text, HStack, Badge } from "@chakra-ui/react";
 import Navbar from "@/components/Navbar";
 import Header from "@/components/Head";
-import data from "@/utils/db";
+import { AccessedInformationType, AccessLog } from "@/utils/types";
+import { GetStaticPaths, GetServerSideProps } from "next";
+import { PatientRecord } from "@/utils/types";
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await fetch("https://codehack-2023-server.christopherhuk1.repl.co/dummy/1/getInfo");
+  const data = await res.json();
+  return {
+    props: {
+      data,
+    },
+  };
+};
 
 const Badges = ({ accessedInformation }: { accessedInformation: AccessedInformationType }) => {
-  let Rows = [];
+  let Rows: React.ReactNode[] = [];
   Object.keys(accessedInformation).forEach((key) => {
-    if (accessedInformation[key] == true) {
+    if (accessedInformation[key]) {
       Rows.push(
         <Badge
           variant="subtle"
           colorScheme="green"
+          marginRight={2}
+          key={key}
         >
           {key}
         </Badge>
@@ -20,42 +34,18 @@ const Badges = ({ accessedInformation }: { accessedInformation: AccessedInformat
     }
   });
 
-  return Rows;
+  return <div>{Rows}</div>;
 };
 
-type AccessLogsType = {
-  visitID: string;
-  clinicID: string;
-  accessTime: string;
-  clinicName: string;
-  clinicLocation: string;
-  clinicPhone: string;
-  clinician: string;
-  clinicianSpecialty: string;
-  accessedInformation: AccessedInformationType;
-};
-
-type AccessedInformationType = {
-  Medication: boolean;
-  Insurance: boolean;
-  Alergies: boolean;
-  Conditions: boolean;
-  "Lab Results": boolean;
-  "Radiology Results": boolean;
-  "Hospital Reports": boolean;
-  "Involved Clinicians": boolean;
-  "Clinic Visit Notes": boolean;
-  "Advanced Care Planning": boolean;
-};
-
-export default function DetailView() {
-  const [details, setDetails] = useState<AccessLogsType>(undefined);
+export default function DetailView({ data }: { data: PatientRecord }) {
+  const [details, setDetails] = useState<AccessLog>();
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
-    if (id !== undefined) {
-      setDetails(data.accessLogs[parseInt(id)]);
+    if (id) {
+      const details = data.accessLogs.find((clinic) => clinic.visitID == id);
+      setDetails(details);
     }
   }, [id]);
 
@@ -68,7 +58,10 @@ export default function DetailView() {
             w="100vw"
             h="100vh"
           >
-            <Navbar tab="Professional" />
+            <Navbar
+              name={data.legalName}
+              tab="Professional"
+            />
 
             <VStack
               w="80%"
